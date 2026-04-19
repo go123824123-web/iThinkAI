@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, 'PingFang SC', sans-serif; }
+  body { width: 1280px; height: 800px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; }
+  .left { flex: 1; padding: 80px; color: white; }
+  .left h1 { font-size: 64px; font-weight: 800; line-height: 1.15; margin-bottom: 20px; }
+  .left p { font-size: 22px; line-height: 1.6; opacity: 0.95; }
+  .left .brand { display: inline-block; padding: 6px 16px; background: rgba(255,255,255,0.22); border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 28px; backdrop-filter: blur(10px); }
+  .right { width: 440px; padding-right: 80px; display: flex; justify-content: center; }
+  #pop-host {
+    width: 360px;
+    height: 640px;
+    border: none;
+    border-radius: 24px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    background: white;
+    overflow: hidden;
+    position: relative;
+  }
+  #pop-host iframe { width: 100%; height: 100%; border: none; }
+</style></head><body>
+  <div class="left">
+    <div class="brand">🧠 iThinkAI</div>
+    <h1>思考留痕迹</h1>
+    <p>每一次思考都被温柔记录下<br>回看时，你会看见自己的成长</p>
+  </div>
+  <div class="right">
+    <div id="pop-host"><iframe id="pop"></iframe></div>
+  </div>
+
+  <script>
+    const HISTORY = [{"id":"1","timestamp":"2026-04-18T13:02:42.946Z","platform":"ChatGPT","question":"为什么 AI 会让人变懒？怎样才能不依赖 AI 保持独立思考？","thinking":"我觉得 AI 让人变懒是因为它把思考过程省略了——直接给答案。要保持思考，也许要在问 AI 之前先给出自己的粗略答案。","durationMs":18000},{"id":"2","timestamp":"2026-04-18T12:02:42.946Z","platform":"Claude","question":"解释一下第一性原理思考","thinking":"第一性原理就是从最基础的事实出发推理，不靠类比。就像做物理题时从公理推导而不是背公式。","durationMs":22000},{"id":"3","timestamp":"2026-04-17T14:02:42.946Z","platform":"Gemini","question":"如何设计一个好的用户增长策略？","thinking":"用户增长不是拉人，是让合适的人主动来、留下。核心是产品价值，其次是传播性。","durationMs":31000},{"id":"4","timestamp":"2026-04-16T14:02:42.946Z","platform":"ChatGPT","question":"React 和 Vue 在响应式原理上有什么本质区别？","thinking":"","durationMs":8000}];
+    const STATS = { totalSessions: 47, totalThinkingTime: 892000, thoughtsWritten: 38 };
+    const SETTINGS = { enabled: true, countdownSeconds: 10, showThinkingBox: true, requireThinking: false, proxyCheckEnabled: true, disabledPlatforms: [] };
+
+    // 在 iframe 加载前先劫持其 chrome.storage
+    const iframe = document.getElementById('pop');
+    iframe.addEventListener('load', () => {
+      // 注入模拟数据并切到 history tab
+      const doc = iframe.contentDocument;
+      const historyTab = doc.querySelector('[data-tab="history"]');
+      if (historyTab) historyTab.click();
+
+      // 等 popup.js 的 loadHistory 被触发后再手动渲染
+      setTimeout(() => {
+        const container = doc.getElementById('history-list');
+        if (!container) return;
+        container.innerHTML = HISTORY.slice(0, 5).map(item => {
+          const date = new Date(item.timestamp);
+          const timeStr = (date.getMonth() + 1) + '/' + date.getDate() + ' ' +
+            String(date.getHours()).padStart(2, '0') + ':' + String(date.getMinutes()).padStart(2, '0');
+          const durationStr = Math.round(item.durationMs / 1000) + 's';
+          const q = item.question.length > 80 ? item.question.substring(0, 80) + '...' : item.question;
+          const thinkingHtml = item.thinking
+            ? '<div class="history-thinking">' + escape(item.thinking.substring(0, 150)) + '</div>'
+            : '';
+          return '<div class="history-item">' +
+            '<div class="history-meta"><span>' + item.platform + ' · ' + timeStr + '</span>' +
+            '<span>思考 ' + durationStr + '</span></div>' +
+            '<div class="history-question">' + escape(q) + '</div>' +
+            thinkingHtml + '</div>';
+        }).join('');
+
+        function escape(s) {
+          const d = doc.createElement('div');
+          d.textContent = s;
+          return d.innerHTML;
+        }
+      }, 400);
+    });
+
+    // 劫持 chrome.storage / chrome.runtime，让 popup.js 不报错
+    const storageStub = {
+      local: {
+        get: async (key) => {
+          if (key === 'settings') return { settings: SETTINGS };
+          if (key === 'thinkingHistory') return { thinkingHistory: HISTORY };
+          if (key === 'stats') return { stats: STATS };
+          return {};
+        },
+        set: async () => {},
+      }
+    };
+    iframe.addEventListener('load', () => {
+      const win = iframe.contentWindow;
+      win.chrome = win.chrome || {};
+      win.chrome.storage = storageStub;
+      win.chrome.runtime = {
+        sendMessage: async () => ({ hasProxy: true, timestamp: Date.now(), stale: false }),
+      };
+    }, { once: true });
+
+    // 现在加载 popup
+    iframe.src = 'file:///Users/c/项目：chrome插件：AI暂停键/popup/popup.html';
+  </script>
+</body></html>

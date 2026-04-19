@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "iThinkAI — 先思考，再问 AI",
+  "version": "1.2.0",
+  "description": "拦截你发给 AI 的每一句话，给你 10 秒先想想。让独立思考变回肌肉记忆。",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "https://claude.ai/*",
+    "https://gemini.google.com/*",
+    "https://chat.deepseek.com/*",
+    "https://kimi.moonshot.cn/*",
+    "https://chat.mistral.ai/*",
+    "https://poe.com/*",
+    "https://copilot.microsoft.com/*",
+    "https://tongyi.aliyun.com/*"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*",
+        "https://chat.deepseek.com/*",
+        "https://kimi.moonshot.cn/*",
+        "https://chat.mistral.ai/*",
+        "https://poe.com/*",
+        "https://copilot.microsoft.com/*",
+        "https://tongyi.aliyun.com/*"
+      ],
+      "js": ["content/content.js"],
+      "css": ["content/content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

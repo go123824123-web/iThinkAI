@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>ChatGPT</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif; }
+  body { background: #212121; color: #ececec; height: 100vh; overflow: hidden; }
+  .app { display: flex; height: 100vh; }
+  .sidebar { width: 260px; background: #171717; padding: 12px; border-right: 1px solid #2a2a2a; }
+  .sidebar .logo { font-size: 15px; font-weight: 600; padding: 12px 8px; display: flex; align-items: center; gap: 10px; }
+  .sidebar .logo::before { content: ""; width: 24px; height: 24px; background: #fff; border-radius: 50%; display: inline-block; }
+  .sidebar-item { padding: 10px 12px; border-radius: 8px; font-size: 13px; color: #d0d0d0; margin: 2px 0; cursor: pointer; }
+  .sidebar-item:hover, .sidebar-item.active { background: #2a2a2a; }
+  .main { flex: 1; display: flex; flex-direction: column; }
+  .header { padding: 14px 20px; font-size: 15px; color: #cfcfcf; border-bottom: 1px solid #2a2a2a; }
+  .messages { flex: 1; padding: 40px 20%; overflow-y: auto; }
+  .msg { display: flex; gap: 16px; margin-bottom: 32px; }
+  .avatar { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
+  .avatar.user { background: #ab68ff; color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 12px; }
+  .avatar.ai { background: #10a37f; }
+  .msg-content { font-size: 15px; line-height: 1.7; color: #ececec; }
+  .input-area {
+    padding: 16px 20%;
+    padding-bottom: 28px;
+  }
+  .input-wrap {
+    background: #303030;
+    border-radius: 28px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #424242;
+  }
+  .input-box {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ececec;
+    font-size: 15px;
+    resize: none;
+  }
+  .send-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: black;
+  }
+  .footnote { text-align: center; font-size: 11px; color: #8d8d8d; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo">ChatGPT</div>
+    <div class="sidebar-item">+ 新对话</div>
+    <div style="margin-top: 20px; font-size: 11px; color: #888; padding: 0 8px;">今天</div>
+    <div class="sidebar-item active">如何提升独立思考能力？</div>
+    <div class="sidebar-item">解释量子纠缠</div>
+    <div class="sidebar-item">Python 异步编程入门</div>
+  </aside>
+  <main class="main">
+    <div class="header">ChatGPT 4o</div>
+    <div class="messages">
+      <div class="msg">
+        <div class="avatar user">我</div>
+        <div class="msg-content">什么是第一性原理思考？</div>
+      </div>
+      <div class="msg">
+        <div class="avatar ai"></div>
+        <div class="msg-content">第一性原理（First Principles Thinking）是指从最基本的事实出发，不依赖类比或经验…</div>
+      </div>
+    </div>
+    <div class="input-area">
+      <div class="input-wrap">
+        <textarea class="input-box" rows="1" readonly>为什么 AI 会让人变懒？怎样才能不依赖 AI 保持独立思考？</textarea>
+        <button class="send-btn">↑</button>
+      </div>
+      <div class="footnote">ChatGPT 也可能会出错。请检查重要信息。</div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

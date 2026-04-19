@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iThinkAI</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- 头部 -->
+    <header class="popup-header">
+      <div class="logo">🧠</div>
+      <h1>iThinkAI</h1>
+      <p class="tagline">先思考，再问 AI</p>
+    </header>
+
+    <!-- 主开关 -->
+    <div class="setting-row main-toggle">
+      <span class="setting-label">启用插件</span>
+      <label class="toggle">
+        <input type="checkbox" id="enabled" checked>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <!-- 标签页导航 -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="settings">设置</button>
+      <button class="tab" data-tab="history">思考记录</button>
+      <button class="tab" data-tab="stats">统计</button>
+    </nav>
+
+    <!-- 设置面板 -->
+    <div class="tab-content active" id="tab-settings">
+      <div class="setting-row">
+        <span class="setting-label">倒计时秒数</span>
+        <div class="stepper">
+          <button class="stepper-btn" id="countdown-dec">−</button>
+          <span class="stepper-value" id="countdown-value">10</span>
+          <button class="stepper-btn" id="countdown-inc">+</button>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <span class="setting-label">显示思考输入框</span>
+        <label class="toggle">
+          <input type="checkbox" id="showThinkingBox" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <span class="setting-label">强制写下想法才能发送</span>
+        <label class="toggle">
+          <input type="checkbox" id="requireThinking">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-section-title">启用的平台</div>
+      <div id="platforms-list" class="platforms-list">
+        <!-- 动态生成 -->
+      </div>
+    </div>
+
+    <!-- 思考记录面板 -->
+    <div class="tab-content" id="tab-history">
+      <div id="history-list" class="history-list">
+        <div class="empty-state">暂无记录</div>
+      </div>
+      <button class="btn-clear" id="clear-history">清空记录</button>
+    </div>
+
+    <!-- 统计面板 -->
+    <div class="tab-content" id="tab-stats">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-sessions">0</div>
+          <div class="stat-label">思考次数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-time">0m</div>
+          <div class="stat-label">总思考时长</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-written">0</div>
+          <div class="stat-label">写下想法次数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-rate">0%</div>
+          <div class="stat-label">思考记录率</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer class="popup-footer">
+      <span>v1.2.0</span>
+      <span>·</span>
+      <span>锻炼独立思考</span>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

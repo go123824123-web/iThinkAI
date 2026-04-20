@@ -1,0 +1,119 @@
+{
+  "extName": {
+    "message": "iThinkAI — Think first, then ask AI",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "A pause button for your brain. 10 seconds to think before you send each message to ChatGPT, Claude, Gemini, and other AI chats.",
+    "description": "Extension description"
+  },
+
+  "tagline": {
+    "message": "Think first, then ask AI"
+  },
+  "enableExtension": {
+    "message": "Enable extension"
+  },
+  "tabSettings": {
+    "message": "Settings"
+  },
+  "tabHistory": {
+    "message": "Thinking Log"
+  },
+  "tabStats": {
+    "message": "Stats"
+  },
+  "countdownSeconds": {
+    "message": "Countdown seconds"
+  },
+  "showThinkingBox": {
+    "message": "Show thinking box"
+  },
+  "requireThinking": {
+    "message": "Require writing a thought before sending"
+  },
+  "enabledPlatforms": {
+    "message": "Enabled platforms"
+  },
+  "emptyHistory": {
+    "message": "No thinking records yet"
+  },
+  "emptyHistoryHint": {
+    "message": "Your thoughts will be recorded automatically when you use AI."
+  },
+  "clearHistory": {
+    "message": "Clear records"
+  },
+  "statSessions": {
+    "message": "Thinking sessions"
+  },
+  "statTime": {
+    "message": "Total thinking time"
+  },
+  "statWritten": {
+    "message": "Thoughts written"
+  },
+  "statRate": {
+    "message": "Thought rate"
+  },
+  "footerMotto": {
+    "message": "Build your thinking muscle"
+  },
+
+  "modalTitle": {
+    "message": "Hold on, think first"
+  },
+  "modalSubtitle": {
+    "message": "Take a moment to think before AI answers."
+  },
+  "yourQuestion": {
+    "message": "Your question"
+  },
+  "writeYourThought": {
+    "message": "Write your thought"
+  },
+  "required": {
+    "message": "required"
+  },
+  "optional": {
+    "message": "optional"
+  },
+  "thinkingPlaceholder": {
+    "message": "If I had to answer this, I would say...\n\nJot down your first take. You'll compare it with AI's reply later."
+  },
+  "timerLabel": {
+    "message": "Thinking time"
+  },
+  "btnCancel": {
+    "message": "Cancel"
+  },
+  "btnSkip": {
+    "message": "Skip & send"
+  },
+  "btnThinking": {
+    "message": "Thinking…"
+  },
+  "btnSend": {
+    "message": "Send to AI"
+  },
+  "btnWriteFirst": {
+    "message": "Write a thought first"
+  },
+  "platformChatGPT": { "message": "ChatGPT" },
+  "platformChatGPTLegacy": { "message": "ChatGPT (legacy)" },
+  "platformClaude": { "message": "Claude" },
+  "platformGemini": { "message": "Gemini" },
+  "platformDeepSeek": { "message": "DeepSeek" },
+  "platformKimi": { "message": "Kimi" },
+  "platformMistral": { "message": "Mistral" },
+  "platformPoe": { "message": "Poe" },
+  "platformCopilot": { "message": "Copilot" },
+  "platformTongyi": { "message": "Tongyi Qianwen" },
+
+  "thoughtDuration": {
+    "message": "thought $SECONDS$s",
+    "placeholders": {
+      "seconds": { "content": "$1" }
+    }
+  }
+}

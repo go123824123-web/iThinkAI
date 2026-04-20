@@ -6,7 +6,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![Manifest V3](https://img.shields.io/badge/manifest-v3-green)](./manifest.json)
-[![Version](https://img.shields.io/badge/version-1.2.0-orange)](https://github.com/go123824123-web/iThinkAI/releases)
+[![Version](https://img.shields.io/badge/version-1.3.0-orange)](https://github.com/go123824123-web/iThinkAI/releases)
+[![i18n: en · zh_CN](https://img.shields.io/badge/i18n-en%20·%20zh__CN-blueviolet)](./_locales)
 
 </div>
 
@@ -37,6 +38,7 @@ AI 给你完美答案，你点头收下。
 - 📊 **思考记录** — 保存每次问题和想法，随时回看对照
 - 📈 **统计面板** — 看看自己累计思考了多久
 - 🌙 **暗色模式** — 自动适配系统主题
+- 🌐 **中英双语** — 跟随浏览器语言自动切换
 
 ## 支持的 AI 平台
 
@@ -72,16 +74,26 @@ cd iThinkAI
 ```
 iThinkAI/
 ├── manifest.json         Manifest V3 声明
-├── content/              注入 AI 站点的倒计时弹窗
-│   ├── content.js
-│   └── content.css
+├── content/
+│   └── content.js        注入 AI 站点的 Shadow DOM 倒计时弹窗
 ├── popup/                工具栏图标点开的设置面板
 │   ├── popup.html
 │   ├── popup.js
 │   └── popup.css
-├── icons/                16 / 48 / 128 图标
-└── store/                Chrome Web Store 相关素材、隐私政策、截图
+├── icons/                拟物风 logo（SVG 源 + 16/48/128 PNG）
+├── _locales/             i18n (en · zh_CN)
+└── store/                Chrome Web Store 素材、隐私政策、截图、图标渲染脚本
 ```
+
+### 图标是代码生成的
+
+源文件是 `icons/icon.svg`（SVG + 渐变 + 高光 + 投影）。要重新生成 PNG：
+
+```bash
+cd store && node render-icons.js
+```
+
+使用 Playwright 以 `1x` deviceScaleFactor 分别渲染 16 / 48 / 128。
 
 ---
 

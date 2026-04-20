@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,98 +7,111 @@
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <div class="popup-container">
-    <!-- 头部 -->
-    <header class="popup-header">
-      <div class="logo">🧠</div>
-      <h1>iThinkAI</h1>
-      <p class="tagline">先思考，再问 AI</p>
+  <div class="container">
+    <header class="header">
+      <svg class="logo" viewBox="0 0 128 128" aria-hidden="true">
+        <defs>
+          <linearGradient id="pbg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#A78BFA"/>
+            <stop offset="55%" stop-color="#7C6DF7"/>
+            <stop offset="100%" stop-color="#4F46E5"/>
+          </linearGradient>
+          <radialGradient id="pgloss" cx="28%" cy="22%" r="55%">
+            <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+            <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0.08"/>
+            <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="pbar" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FFFFFF"/>
+            <stop offset="100%" stop-color="#DDD6FE"/>
+          </linearGradient>
+        </defs>
+        <rect x="4" y="4" width="120" height="120" rx="26" fill="url(#pbg)"/>
+        <rect x="4" y="4" width="120" height="120" rx="26" fill="url(#pgloss)"/>
+        <rect x="42" y="34" width="16" height="60" rx="7" fill="url(#pbar)"/>
+        <rect x="70" y="34" width="16" height="60" rx="7" fill="url(#pbar)"/>
+      </svg>
+      <h1 class="brand">iThinkAI</h1>
+      <p class="tagline" data-i18n="tagline"></p>
     </header>
 
-    <!-- 主开关 -->
-    <div class="setting-row main-toggle">
-      <span class="setting-label">启用插件</span>
+    <div class="main-toggle">
+      <span class="main-toggle-text" data-i18n="enableExtension"></span>
       <label class="toggle">
         <input type="checkbox" id="enabled" checked>
         <span class="toggle-slider"></span>
       </label>
     </div>
 
-    <!-- 标签页导航 -->
     <nav class="tabs">
-      <button class="tab active" data-tab="settings">设置</button>
-      <button class="tab" data-tab="history">思考记录</button>
-      <button class="tab" data-tab="stats">统计</button>
+      <button class="tab active" data-tab="settings" data-i18n="tabSettings"></button>
+      <button class="tab" data-tab="history" data-i18n="tabHistory"></button>
+      <button class="tab" data-tab="stats" data-i18n="tabStats"></button>
     </nav>
 
-    <!-- 设置面板 -->
-    <div class="tab-content active" id="tab-settings">
-      <div class="setting-row">
-        <span class="setting-label">倒计时秒数</span>
+    <!-- Settings -->
+    <section class="tab-content active" id="tab-settings">
+      <div class="row">
+        <span class="row-label" data-i18n="countdownSeconds"></span>
         <div class="stepper">
-          <button class="stepper-btn" id="countdown-dec">−</button>
+          <button class="stepper-btn" id="countdown-dec" aria-label="decrease">−</button>
           <span class="stepper-value" id="countdown-value">10</span>
-          <button class="stepper-btn" id="countdown-inc">+</button>
+          <button class="stepper-btn" id="countdown-inc" aria-label="increase">+</button>
         </div>
       </div>
 
-      <div class="setting-row">
-        <span class="setting-label">显示思考输入框</span>
+      <div class="row">
+        <span class="row-label" data-i18n="showThinkingBox"></span>
         <label class="toggle">
           <input type="checkbox" id="showThinkingBox" checked>
           <span class="toggle-slider"></span>
         </label>
       </div>
 
-      <div class="setting-row">
-        <span class="setting-label">强制写下想法才能发送</span>
+      <div class="row">
+        <span class="row-label" data-i18n="requireThinking"></span>
         <label class="toggle">
           <input type="checkbox" id="requireThinking">
           <span class="toggle-slider"></span>
         </label>
       </div>
 
-      <div class="setting-section-title">启用的平台</div>
-      <div id="platforms-list" class="platforms-list">
-        <!-- 动态生成 -->
-      </div>
-    </div>
+      <div class="section-title" data-i18n="enabledPlatforms"></div>
+      <div id="platforms-list" class="platforms-list"></div>
+    </section>
 
-    <!-- 思考记录面板 -->
-    <div class="tab-content" id="tab-history">
-      <div id="history-list" class="history-list">
-        <div class="empty-state">暂无记录</div>
-      </div>
-      <button class="btn-clear" id="clear-history">清空记录</button>
-    </div>
+    <!-- History -->
+    <section class="tab-content" id="tab-history">
+      <div id="history-list" class="history-list"></div>
+      <button class="btn-clear" id="clear-history" data-i18n="clearHistory"></button>
+    </section>
 
-    <!-- 统计面板 -->
-    <div class="tab-content" id="tab-stats">
+    <!-- Stats -->
+    <section class="tab-content" id="tab-stats">
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-value" id="stat-sessions">0</div>
-          <div class="stat-label">思考次数</div>
+          <div class="stat-label" data-i18n="statSessions"></div>
         </div>
         <div class="stat-card">
           <div class="stat-value" id="stat-time">0m</div>
-          <div class="stat-label">总思考时长</div>
+          <div class="stat-label" data-i18n="statTime"></div>
         </div>
         <div class="stat-card">
           <div class="stat-value" id="stat-written">0</div>
-          <div class="stat-label">写下想法次数</div>
+          <div class="stat-label" data-i18n="statWritten"></div>
         </div>
         <div class="stat-card">
           <div class="stat-value" id="stat-rate">0%</div>
-          <div class="stat-label">思考记录率</div>
+          <div class="stat-label" data-i18n="statRate"></div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- 底部 -->
-    <footer class="popup-footer">
-      <span>v1.2.0</span>
-      <span>·</span>
-      <span>锻炼独立思考</span>
+    <footer class="footer">
+      <span>v1.3.0</span>
+      <span class="footer-dot">·</span>
+      <span data-i18n="footerMotto"></span>
     </footer>
   </div>
   <script src="popup.js"></script>

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <!-- Background: indigo-violet diagonal -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="55%" stop-color="#7C6DF7"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+
+    <!-- Darker inner edge for bevel -->
+    <linearGradient id="edge" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.2"/>
+    </linearGradient>
+
+    <!-- Top-left radial highlight (glass gloss) -->
+    <radialGradient id="gloss" cx="28%" cy="22%" r="55%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Pause bar: porcelain gradient -->
+    <linearGradient id="bar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#F5F3FF"/>
+      <stop offset="100%" stop-color="#DDD6FE"/>
+    </linearGradient>
+
+    <!-- Pause bar inner highlight strip -->
+    <linearGradient id="barHi" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Soft drop shadow under bars -->
+    <filter id="barShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.2"/>
+      <feOffset dx="0" dy="2" result="off"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.45"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Outer ambient shadow for the whole tile (inside viewport) -->
+    <filter id="outerShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dy="4" result="off"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Base tile with gradient -->
+  <rect x="4" y="4" width="120" height="120" rx="26" ry="26" fill="url(#bg)" filter="url(#outerShadow)"/>
+
+  <!-- Top gloss overlay -->
+  <rect x="4" y="4" width="120" height="120" rx="26" ry="26" fill="url(#gloss)"/>
+
+  <!-- Bevel edge outline -->
+  <rect x="4.5" y="4.5" width="119" height="119" rx="25.5" ry="25.5" fill="none" stroke="url(#edge)" stroke-width="1"/>
+
+  <!-- Pause bars group -->
+  <g filter="url(#barShadow)">
+    <rect x="42" y="34" width="16" height="60" rx="7" ry="7" fill="url(#bar)"/>
+    <rect x="70" y="34" width="16" height="60" rx="7" ry="7" fill="url(#bar)"/>
+  </g>
+
+  <!-- Bar top-edge highlight strip (very subtle) -->
+  <rect x="44" y="36" width="12" height="2" rx="1" ry="1" fill="url(#barHi)" opacity="0.9"/>
+  <rect x="72" y="36" width="12" height="2" rx="1" ry="1" fill="url(#barHi)" opacity="0.9"/>
+</svg>

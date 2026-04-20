@@ -1,0 +1,119 @@
+{
+  "extName": {
+    "message": "iThinkAI — 先思考，再问 AI",
+    "description": "扩展名称"
+  },
+  "extDescription": {
+    "message": "拦截你发给 AI 的每一句话，给你 10 秒先想想。让独立思考变回肌肉记忆。",
+    "description": "扩展描述"
+  },
+
+  "tagline": {
+    "message": "先思考，再问 AI"
+  },
+  "enableExtension": {
+    "message": "启用插件"
+  },
+  "tabSettings": {
+    "message": "设置"
+  },
+  "tabHistory": {
+    "message": "思考记录"
+  },
+  "tabStats": {
+    "message": "统计"
+  },
+  "countdownSeconds": {
+    "message": "倒计时秒数"
+  },
+  "showThinkingBox": {
+    "message": "显示思考输入框"
+  },
+  "requireThinking": {
+    "message": "强制写下想法才能发送"
+  },
+  "enabledPlatforms": {
+    "message": "启用的平台"
+  },
+  "emptyHistory": {
+    "message": "暂无思考记录"
+  },
+  "emptyHistoryHint": {
+    "message": "使用 AI 时会自动记录"
+  },
+  "clearHistory": {
+    "message": "清空记录"
+  },
+  "statSessions": {
+    "message": "思考次数"
+  },
+  "statTime": {
+    "message": "总思考时长"
+  },
+  "statWritten": {
+    "message": "写下想法次数"
+  },
+  "statRate": {
+    "message": "思考记录率"
+  },
+  "footerMotto": {
+    "message": "锻炼独立思考"
+  },
+
+  "modalTitle": {
+    "message": "先想一想"
+  },
+  "modalSubtitle": {
+    "message": "在 AI 回答之前，花点时间自己思考。"
+  },
+  "yourQuestion": {
+    "message": "你的问题"
+  },
+  "writeYourThought": {
+    "message": "写下你的想法"
+  },
+  "required": {
+    "message": "必填"
+  },
+  "optional": {
+    "message": "可选"
+  },
+  "thinkingPlaceholder": {
+    "message": "如果是我来回答这个问题，我会说……\n\n写下你的初步想法，之后可以和 AI 的回答对比。"
+  },
+  "timerLabel": {
+    "message": "思考倒计时"
+  },
+  "btnCancel": {
+    "message": "取消"
+  },
+  "btnSkip": {
+    "message": "跳过并发送"
+  },
+  "btnThinking": {
+    "message": "思考中……"
+  },
+  "btnSend": {
+    "message": "发送给 AI"
+  },
+  "btnWriteFirst": {
+    "message": "请先写下想法"
+  },
+  "platformChatGPT": { "message": "ChatGPT" },
+  "platformChatGPTLegacy": { "message": "ChatGPT (旧域名)" },
+  "platformClaude": { "message": "Claude" },
+  "platformGemini": { "message": "Gemini" },
+  "platformDeepSeek": { "message": "DeepSeek" },
+  "platformKimi": { "message": "Kimi" },
+  "platformMistral": { "message": "Mistral" },
+  "platformPoe": { "message": "Poe" },
+  "platformCopilot": { "message": "Copilot" },
+  "platformTongyi": { "message": "通义千问" },
+
+  "thoughtDuration": {
+    "message": "思考 $SECONDS$s",
+    "placeholders": {
+      "seconds": { "content": "$1" }
+    }
+  }
+}

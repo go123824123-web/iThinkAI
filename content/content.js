@@ -543,6 +543,41 @@
     let countdown = settings.countdownSeconds;
     const thinkingStart = Date.now();
 
+    // Single source of truth for the send button state.
+    // Rules:
+    //  - If the user has typed anything → button is ready immediately,
+    //    regardless of countdown (written thought fulfils the pause).
+    //  - Else, after countdown ends → button is ready (unless requireThinking).
+    //  - Else → "thinking…" disabled.
+    function updateButtonState() {
+      const hasText = textarea && textarea.value.trim().length > 0;
+      const countdownDone = countdown <= 0;
+
+      if (hasText) {
+        sendBtn.disabled = false;
+        sendBtn.classList.add('ready');
+        sendBtnText.textContent = t('btnSend');
+        if (skipBtn) skipBtn.style.display = 'none';
+        return;
+      }
+      if (countdownDone) {
+        if (settings.requireThinking) {
+          sendBtn.disabled = true;
+          sendBtn.classList.remove('ready');
+          sendBtnText.textContent = t('btnWriteFirst');
+        } else {
+          sendBtn.disabled = false;
+          sendBtn.classList.add('ready');
+          sendBtnText.textContent = t('btnSend');
+        }
+        return;
+      }
+      // countdown still running, no text
+      sendBtn.disabled = true;
+      sendBtn.classList.remove('ready');
+      sendBtnText.textContent = t('btnThinking');
+    }
+
     // Focus trap — if focus ever leaves the shadow root while modal is open,
     // pull it back to the textarea (or to the cancel button if no textarea).
     const focusTarget = () => textarea || cancelBtn;
@@ -561,39 +596,36 @@
     // Initial focus (deferred so host site's own focus handlers settle first)
     setTimeout(ensureFocus, 50);
 
+    // Initial ring state: full (remaining = total, offset = 0).
+    progressCircle.style.strokeDashoffset = '0';
+    updateButtonState();
+
     // Countdown
     const timerInterval = setInterval(() => {
       countdown--;
       if (timerText) timerText.textContent = Math.max(0, countdown);
-      const progress = (settings.countdownSeconds - countdown) / settings.countdownSeconds;
-      progressCircle.style.strokeDashoffset = circumference * (1 - progress);
+      // Ring depletes: offset grows from 0 → circumference as time elapses.
+      const elapsed = 1 - Math.max(0, countdown) / settings.countdownSeconds;
+      progressCircle.style.strokeDashoffset = circumference * elapsed;
 
       if (countdown <= 0) {
         clearInterval(timerInterval);
         timerText.textContent = '✓';
-        sendBtn.disabled = false;
-        sendBtn.classList.add('ready');
-        sendBtnText.textContent = t('btnSend');
-        skipBtn.style.display = 'none';
-        if (settings.requireThinking && textarea && !textarea.value.trim()) {
-          sendBtn.disabled = true;
-          sendBtnText.textContent = t('btnWriteFirst');
-        }
+        if (skipBtn) skipBtn.style.display = 'none';
+        updateButtonState();
       }
     }, 1000);
 
-    // Show skip after 3s
+    // Show skip after 3s (only if user hasn't already started writing —
+    // otherwise the send button is already active and skip is pointless).
     setTimeout(() => {
-      if (host.isConnected && countdown > 0) skipBtn.style.display = '';
+      if (host.isConnected && countdown > 0 && (!textarea || !textarea.value.trim())) {
+        skipBtn.style.display = '';
+      }
     }, 3000);
 
-    if (settings.requireThinking && textarea) {
-      textarea.addEventListener('input', () => {
-        if (countdown <= 0) {
-          sendBtn.disabled = !textarea.value.trim();
-          sendBtnText.textContent = textarea.value.trim() ? t('btnSend') : t('btnWriteFirst');
-        }
-      });
+    if (textarea) {
+      textarea.addEventListener('input', updateButtonState);
     }
 
     const closeModal = () => {

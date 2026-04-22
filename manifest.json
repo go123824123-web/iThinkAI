@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "iThinkAI — 先思考，再问 AI",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "拦截你发给 AI 的每一句话，给你 10 秒先想想。让独立思考变回肌肉记忆。",
-  "permissions": ["storage", "activeTab"],
+  "permissions": ["storage"],
   "host_permissions": [
     "https://chatgpt.com/*",
     "https://chat.openai.com/*",

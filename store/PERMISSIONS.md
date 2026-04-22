@@ -14,16 +14,6 @@ Used to locally persist user preferences (countdown duration, enabled platforms)
 
 ---
 
-## `activeTab`
-
-**中文理由：**
-用于在用户主动打开的 AI 平台标签页上运行 content script，注入思考暂停弹窗。仅在用户明确访问已声明的 AI 站点时激活。
-
-**English justification:**
-Required to inject the thinking-pause modal into the active AI platform tab when the user composes a message. Only activates on explicitly declared AI hosts.
-
----
-
 ## Host Permissions
 
 **声明的主机权限：**
